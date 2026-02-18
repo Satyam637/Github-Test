@@ -1,7 +1,6 @@
 package com.visualpathit.account.controller;
 
 import com.visualpathit.account.model.User;
-import com.visualpathit.account.service.ProducerService;
 import com.visualpathit.account.service.SecurityService;
 import com.visualpathit.account.service.UserService;
 import com.visualpathit.account.utils.MemcachedUtils;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -27,9 +25,6 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
-
-    @Autowired
-    private ProducerService producerService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -161,5 +156,3 @@ public class UserController {
 
     private static String generateString() {
         return "uuid = " + UUID.randomUUID().toString();
-    }
-}

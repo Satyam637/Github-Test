@@ -15,9 +15,6 @@ import java.util.concurrent.TimeoutException;
 @Controller
 public class RabbitMqController {
 
-    @Autowired
-    private RabbitMqUtil rabbitMqUtil;
-
     @GetMapping("/user/rabbit")
     public ModelAndView checkRabbitMqStatus() {
         ModelAndView modelAndView = new ModelAndView();
