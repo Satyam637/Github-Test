@@ -2,11 +2,20 @@ name: Maven CI Pipeline
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose target environment"
+        required: true
+        type: choice
+        options:
+          - Test
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      ENVIRONMENT: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -33,6 +42,5 @@ jobs:
 
       - name: Upload WAR to S3
         run: |
-           aws s3 cp target/vprofile-v2.war s3://${{ secrets.S3_BUCKET }}/
-       
+          aws s3 cp target/vprofile-v2.war s3://${{ secrets.S3_BUCKET }}/
 
