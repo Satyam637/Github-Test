@@ -153,6 +153,4 @@ public class UserController {
         user.setSkills(userForm.getSkills());
         user.setWorkingExperience(userForm.getWorkingExperience());
     }
-
-    private static String generateString() {
-        return "uuid = " + UUID.randomUUID().toString();
+}

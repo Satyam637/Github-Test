@@ -62,8 +62,8 @@ public class ElasticSearchController {
 
     @RequestMapping(value = "/rest/users/view/{id}", method = RequestMethod.GET)
     public String view(@PathVariable final String id, final Model model) throws IOException {
-        try (RestHighLevelClient client = ElasticsearchUtil.ighLevelClient()) {
-            GetRequest getRequest = new GetRequest("users", "_doc", id);
+        try (RestHighLevelClient client = ElasticsearchUtil.getRestHighLevelClient()) {
+            GetRequest getRequest = new GetRequest("users", id);
             GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);
 
             System.out.println(getResponse.getSourceAsString());
@@ -75,8 +75,8 @@ public class ElasticSearchController {
 
     @RequestMapping(value = "/rest/users/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable final String id, final Model model) throws IOException {
-        try (RestHighLevelClient client = ElasticsearchUtil.getRestHilient()) {
-            UpdateRequest updateRequest = new UpdateRequest("users", "_doc", id)
+        try (RestHighLevelClient client = ElasticsearchUtil.getRestHighLevelClient()) {
+            UpdateRequest updateRequest = new UpdateRequest("users", id)
                     .doc(XContentFactory.jsonBuilder()
                             .startObject()
                             .field("gender", "male")
@@ -92,8 +92,8 @@ public class ElasticSearchController {
 
     @RequestMapping(value = "/rest/users/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable final String id, final Model model) throws IOException {
-        try (RestHighLevelClient client = ElasticsearchUtil.getRestHilient()) {
-            DeleteRequest deleteRequest = new DeleteRequest("users", "_doc", id);
+        try (RestHighLevelClient client = ElasticsearchUtil.getRestHighLevelClient()) {
+            DeleteRequest deleteRequest = new DeleteRequest("users", id);
             DeleteResponse deleteResponse = client.delete(deleteRequest, RequestOptions.DEFAULT);
 
             System.out.println(deleteResponse.getResult().toString());
